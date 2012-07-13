@@ -48,8 +48,14 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
            System.out.println("About to generate");
            reportBuilder = new ReportBuilder(list, outputDirectory, "", "1", projectName, false, false, true, false);
            reportBuilder.generateReports();
+           
+           boolean buildResult = reportBuilder.getBuildStatus();
+           if(!buildResult){
+	         throw new MojoExecutionException("BUILD FAILED - Check Report For Details");
+           }
+            
       } catch (Exception e) {
-         throw new MojoExecutionException("Could not create report.", e);
+         throw new MojoExecutionException("Error Found:", e);
       }
    }
 }
