@@ -37,8 +37,8 @@
         <configuration>
           <projectsDirectory>src/it</projectsDirectory>
           <settingsFile>src/it/settings.xml</settingsFile>
-          <localRepositoryPath>${project.build.directory}/local-repo</localRepositoryPath>
-          <cloneProjectsTo>${project.build.directory}/it</cloneProjectsTo>
+          <localRepositoryPath>target/local-repo</localRepositoryPath>
+          <cloneProjectsTo>target/it</cloneProjectsTo>
           <filterProperties>
             <maven-cucumber-version>${project.version}</maven-cucumber-version>
             <cucumber-jvm.version>${cucumber-jvm.test.version}</cucumber-jvm.version>
