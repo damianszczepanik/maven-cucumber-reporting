@@ -6,7 +6,7 @@
     <artifactId>cucumber-failure</artifactId>
     <version>1.0-SNAPSHOT</version>
     <properties>
-        <cucumber-jvm.version>1.0.11</cucumber-jvm.version>
+        <cucumber-jvm.version>@cucumber-jvm.version@</cucumber-jvm.version>
         <spring.version>3.1.2.RELEASE</spring.version>
         <junit.version>4.10</junit.version>
         <fest-assertions.version>1.4</fest-assertions.version>

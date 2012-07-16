@@ -7,6 +7,9 @@
   <version>0.0.1</version>
   <name>maven-cucumber-reporting</name>
   <url>http://maven.apache.org</url>
+  <properties>
+    <cucumber-jvm.test.version>1.0.11</cucumber-jvm.test.version>
+  </properties>
   <dependencies>
     <dependency>
       <groupId>org.apache.maven</groupId>
@@ -33,12 +36,12 @@
         <version>1.6</version>
         <configuration>
           <projectsDirectory>src/it</projectsDirectory>
-          <localRepositoryPath>target/local-repo</localRepositoryPath>
           <settingsFile>src/it/settings.xml</settingsFile>
+          <localRepositoryPath>${project.build.directory}/local-repo</localRepositoryPath>
           <cloneProjectsTo>${project.build.directory}/it</cloneProjectsTo>
           <filterProperties>
             <maven-cucumber-version>${project.version}</maven-cucumber-version>
-            <localRepositoryUrl>target/local-repo</localRepositoryUrl>
+            <cucumber-jvm.version>${cucumber-jvm.test.version}</cucumber-jvm.version>
           </filterProperties>
         </configuration>
         <executions>
