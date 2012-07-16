@@ -44,9 +44,10 @@
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <projectName>${project.artifactId}</projectName>
                             <outputDirectory>${project.build.directory}/cucumber-html-reports</outputDirectory>
-                            <cucumberOutput>${project.build.directory}/cucumber.json</cucumberOutput>
+                            <cucumberIncludePatterns>
+                                <param>**/*.json</param> 
+                            </cucumberIncludePatterns>
                         </configuration>
                     </execution>
                 </executions>

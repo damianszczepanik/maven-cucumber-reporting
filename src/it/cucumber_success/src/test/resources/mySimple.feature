@@ -1,4 +1,3 @@
-@US
 Feature: Simple Widget Counting Test
   Lets count some widgets!!!
 

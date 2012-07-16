@@ -1,4 +1,4 @@
-@UnusedTag
+@Mobile @Desktop
 Feature: Simple Widget Counting Test
   Lets count some widgets!!!
 
@@ -14,7 +14,7 @@ Feature: Simple Widget Counting Test
     | 12        | 5            | 7     |
     | 2         | 1            | 1     |    
     | 5         | 5            | 0     |    
-    | 13        | 5            | 7     |    
-    | 42        | 29           | 12    |
+    | 13        | 5            | 8     |    
+    | 42        | 29           | 13    |
     
         
