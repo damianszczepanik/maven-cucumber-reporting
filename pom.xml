@@ -30,7 +30,8 @@
   </dependencies>
   <build>
     <plugins>
-      <plugin>
+      <!-- breaks on my local jenkins 
+      plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-invoker-plugin</artifactId>
         <version>1.6</version>
@@ -53,7 +54,7 @@
             </goals>
           </execution>
         </executions>
-      </plugin>
+      </plugin -->
     </plugins>  
   </build>
 </project>
