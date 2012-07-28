@@ -1,7 +1,14 @@
-Maven mojo for the cucumber-reporting
+Maven mojo for the cucumber-reporting - put this into your pom.xml and run mvn clean install or mvn clean test and cucumber reports will be generated in target/cucumber-html-reports
 
      <build>
             <plugins>
+                <plugin>
+				    <groupId>org.apache.maven.plugins</groupId>
+				    <artifactId>maven-surefire-plugin</artifactId>
+				    <configuration>
+				        <testFailureIgnore>true</testFailureIgnore>
+				    </configuration>
+				</plugin>
                 <plugin>
                     <groupId>net.masterthought</groupId>
                     <artifactId>maven-cucumber-reporting</artifactId>
