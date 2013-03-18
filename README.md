@@ -1,5 +1,7 @@
 Maven mojo for the cucumber-reporting - put this into your pom.xml and run mvn clean install or mvn clean test and cucumber reports will be generated in target/cucumber-html-reports
 
+Read more about the project and configuration here: [maven-cucumber-reports](http://masterthought.net/section/cucumber-reporting)
+
      <build>
             <plugins>
                 <plugin>
@@ -30,3 +32,21 @@ Maven mojo for the cucumber-reporting - put this into your pom.xml and run mvn c
                 </plugin>
             </plugins>
         </build>
+
+You will also need the maven dependency:
+
+        <dependency>
+            <groupid>net.masterthought</groupid>
+            <artifactid>maven-cucumber-reporting</artifactid>
+            <version>0.0.2</version>
+        </dependency>
+
+You may also need to add the sonatype repository if it has not yet been synced with the maven central repository:
+
+           <repositories>
+                <repository>
+                    <id>sonatype-releases</id>
+                    <url>https://oss.sonatype.org/content/repositories/releases/</url>
+                </repository>
+            </repositories>
+
