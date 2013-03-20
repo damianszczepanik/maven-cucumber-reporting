@@ -39,6 +39,14 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
      */
     private File cucumberOutput;
 
+    /**
+     * Enable Flash Charts.
+     *
+     * @parameter expression="true"
+     * @required
+     */
+    private Boolean enableFlashCharts;
+
     public void execute() throws MojoExecutionException {
         if (!outputDirectory.exists()) {
             outputDirectory.mkdirs();
@@ -50,7 +58,7 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
 
         try {
             System.out.println("About to generate");
-            reportBuilder = new ReportBuilder(list, outputDirectory, "", "1", projectName, false, false, true, false, false, "");
+            reportBuilder = new ReportBuilder(list, outputDirectory, "", "1", projectName, false, false, enableFlashCharts, false, false, "");
             reportBuilder.generateReports();
 
             boolean buildResult = reportBuilder.getBuildStatus();

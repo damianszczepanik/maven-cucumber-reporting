@@ -2,6 +2,8 @@ Maven mojo for the cucumber-reporting - put this into your pom.xml and run mvn c
 
 Read more about the project and configuration here: [maven-cucumber-reports](http://masterthought.net/section/cucumber-reporting)
 
+Run with: mvn clean install
+
      <build>
             <plugins>
                 <plugin>
@@ -14,7 +16,7 @@ Read more about the project and configuration here: [maven-cucumber-reports](htt
                 <plugin>
                     <groupId>net.masterthought</groupId>
                     <artifactId>maven-cucumber-reporting</artifactId>
-                    <version>0.0.1</version>
+                    <version>0.0.3</version>
                     <executions>
                         <execution>
                             <id>execution</id>
@@ -33,12 +35,12 @@ Read more about the project and configuration here: [maven-cucumber-reports](htt
             </plugins>
         </build>
 
-You will also need the maven dependency:
+You may also need the maven dependency:
 
         <dependency>
             <groupid>net.masterthought</groupid>
             <artifactid>maven-cucumber-reporting</artifactid>
-            <version>0.0.2</version>
+            <version>0.0.3</version>
         </dependency>
 
 You may also need to add the sonatype repository if it has not yet been synced with the maven central repository:
