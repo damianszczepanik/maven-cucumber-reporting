@@ -53,3 +53,18 @@ You may also need to add the sonatype repository if it has not yet been synced w
                 </repository>
             </repositories>
 
+You may also need to include the Totally Lazy dependency and repository:
+
+       <repositories>
+           <repository>
+               <id>repo.bodar.com</id>
+               <url>http://repo.bodar.com</url>
+           </repository>
+       </repositories>
+
+       <dependency>
+               <groupId>com.googlecode.totallylazy</groupId>
+               <artifactId>totallylazy</artifactId>
+               <version>991</version>
+       </dependency>
+
