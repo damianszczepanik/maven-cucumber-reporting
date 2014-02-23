@@ -40,6 +40,22 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
     private File cucumberOutput;
 
     /**
+     * Skipped fails
+     *
+     * @parameter expression="false"
+     * @required
+     */
+    private Boolean skippedFails;
+
+    /**
+     * Undefined fails
+     *
+     * @parameter expression="false"
+     * @required
+     */
+    private Boolean undefinedFails;
+
+    /**
      * Enable Flash Charts.
      *
      * @parameter expression="true"
@@ -58,7 +74,7 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
 
         try {
             System.out.println("About to generate");
-            reportBuilder = new ReportBuilder(list, outputDirectory, "", "1", projectName, false, false, enableFlashCharts, false, false, "");
+            reportBuilder = new ReportBuilder(list, outputDirectory, "", "1", projectName, skippedFails, undefinedFails, enableFlashCharts, false, false, "");
             reportBuilder.generateReports();
 
             boolean buildResult = reportBuilder.getBuildStatus();
