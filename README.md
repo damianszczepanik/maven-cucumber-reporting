@@ -16,7 +16,7 @@ Run with: mvn clean install
                 <plugin>
                     <groupId>net.masterthought</groupId>
                     <artifactId>maven-cucumber-reporting</artifactId>
-                    <version>0.0.4</version>
+                    <version>0.0.5</version>
                     <executions>
                         <execution>
                             <id>execution</id>
@@ -41,7 +41,7 @@ You may also need the maven dependency:
         <dependency>
             <groupid>net.masterthought</groupid>
             <artifactid>maven-cucumber-reporting</artifactid>
-            <version>0.0.4</version>
+            <version>0.0.5</version>
         </dependency>
 
 You may also need to add the sonatype repository if it has not yet been synced with the maven central repository:
@@ -65,6 +65,6 @@ You may also need to include the Totally Lazy dependency and repository:
        <dependency>
                <groupId>com.googlecode.totallylazy</groupId>
                <artifactId>totallylazy</artifactId>
-               <version>991</version>
+               <version>1077</version>
        </dependency>
 
