@@ -1,2 +1,10 @@
 target
 .idea
+bin
+*.iml
+.gitignore
+.project
+.classpath
+.settings
+*.iws
+*.ipr
