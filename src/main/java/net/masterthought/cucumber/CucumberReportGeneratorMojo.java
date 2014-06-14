@@ -24,13 +24,20 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
     private String projectName;
 
     /**
+     * Build number.
+     *
+     * @parameter expression="${build.number}" default-value="1"
+     */
+    private String buildNumber;
+    
+    /**
      * Location of the file.
      *
      * @parameter expression="${project.build.directory}/cucumber-reports"
      * @required
      */
     private File outputDirectory;
-
+    
     /**
      * Location of the file.
      *
@@ -42,7 +49,7 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
     /**
      * Skipped fails
      *
-     * @parameter expression="false"
+     * @parameter expression="false" default-value="false"
      * @required
      */
     private Boolean skippedFails;
@@ -50,7 +57,7 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
     /**
      * Undefined fails
      *
-     * @parameter expression="false"
+     * @parameter expression="false" default-value="false"
      * @required
      */
     private Boolean undefinedFails;
@@ -74,7 +81,7 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
 
         try {
             System.out.println("About to generate");
-            reportBuilder = new ReportBuilder(list, outputDirectory, "", "1", projectName, skippedFails, undefinedFails, enableFlashCharts, false, false, "", false);
+            reportBuilder = new ReportBuilder(list, outputDirectory, "", buildNumber, projectName, skippedFails, undefinedFails, enableFlashCharts, false, false, "", false);
             reportBuilder.generateReports();
 
             boolean buildResult = reportBuilder.getBuildStatus();
