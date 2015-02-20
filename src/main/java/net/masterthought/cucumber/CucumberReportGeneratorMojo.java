@@ -73,6 +73,14 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
      */
     private Boolean enableFlashCharts;
 
+    /**
+     * Skip check for failed build result
+     *
+     * @parameter expression="true" default-value="true"
+     * @required
+     */
+    private Boolean checkBuildResult;
+
     public void execute() throws MojoExecutionException {
         if (!outputDirectory.exists()) {
             outputDirectory.mkdirs();
@@ -88,9 +96,11 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
             getLog().info("About to generate Cucumber report.");
             reportBuilder.generateReports();
 
-            boolean buildResult = reportBuilder.getBuildStatus();
-            if (!buildResult) {
-                throw new MojoExecutionException("BUILD FAILED - Check Report For Details");
+            if (checkBuildResult) {
+                boolean buildResult = reportBuilder.getBuildStatus();
+                if (!buildResult) {
+                    throw new MojoExecutionException("BUILD FAILED - Check Report For Details");
+                }
             }
 
         } catch (Exception e) {
