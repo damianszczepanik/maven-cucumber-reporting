@@ -25,6 +25,18 @@ public class CucumberReportGeneratorMojoTest {
 		assertThat(files, contains(testResource("cuc.json")));
 	}
 
+	@Test
+	public void testNotExistingCucumberFile() throws Exception {
+		//given a not existing resource
+		File notExistingFile = new File(testResource("cucumber"), "a/not/existing/path");
+
+		//when I get the list of report files files
+		Collection<File> files = cucumberFiles(notExistingFile);
+
+		//then the list should be empty
+		assertThat(files, hasSize(0));
+	}
+
 	private File testResource(String relPath) throws URISyntaxException {
 		return new File(getClass().getResource("/" + relPath).toURI());
 	}
