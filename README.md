@@ -41,7 +41,7 @@ You may also need the maven dependency:
         <dependency>
             <groupid>net.masterthought</groupid>
             <artifactid>maven-cucumber-reporting</artifactid>
-            <version>0.0.5</version>
+            <version>0.0.24</version>
         </dependency>
 
 You may also need to add the sonatype repository if it has not yet been synced with the maven central repository:
@@ -65,6 +65,6 @@ You may also need to include the Totally Lazy dependency and repository:
        <dependency>
                <groupId>com.googlecode.totallylazy</groupId>
                <artifactId>totallylazy</artifactId>
-               <version>1077</version>
+               <version>1.20</version>
        </dependency>
 
