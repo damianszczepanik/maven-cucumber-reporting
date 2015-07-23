@@ -5,11 +5,9 @@ import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
+
+import static net.masterthought.cucumber.ReportBuilder.newReportBuilder;
 
 /**
  * Goal which generates a Cucumber Report.
@@ -97,6 +95,13 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
      * @required
      */
     private Boolean checkBuildResult;
+    /**
+     * Disable tags reporting
+     *
+     * @parameter expression="false" default-value="false"
+     * @required
+     */
+    private Boolean disableTagsReporting;
 
     public void execute() throws MojoExecutionException {
         if (!outputDirectory.exists()) {
@@ -114,7 +119,25 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
         }
 
         try {
-            ReportBuilder reportBuilder = new ReportBuilder(list, outputDirectory, "", buildNumber, projectName, skippedFails, pendingFails, undefinedFails, missingFails, enableFlashCharts, false, false, "", false, false);
+
+            ReportBuilder reportBuilder = newReportBuilder()
+                    .withJsonReports(list)
+                    .withReportOutputDirectory(outputDirectory)
+                    .withPluginUrlPath("")
+                    .withBuildNumber(buildNumber)
+                    .withBuildProject(projectName)
+                    .withSkippedFails(skippedFails)
+                    .withPendingFails(pendingFails)
+                    .withUndefinedFails(undefinedFails)
+                    .withMissingFails(missingFails)
+                    .withFlashCharts(enableFlashCharts)
+                    .withJenkins(false)
+                    .withArtifactsEnabled(false)
+                    .withArtifactConfig("")
+                    .withHighCharts(false)
+                    .withParallelTesting(false)
+                    .withTagsReporting(!disableTagsReporting).build();//TODO: need to refactor builder with no argument methods for boolean properties, need to explore a way to assign default values for maven plugin parameters using @Parameter annotation
+
             getLog().info("About to generate Cucumber report.");
             reportBuilder.generateReports();
 
