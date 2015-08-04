@@ -98,6 +98,14 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
      */
     private Boolean checkBuildResult;
 
+    /**
+     * Build reports from parallel tests
+     *
+     * @parameter expression="true" default-value="true"
+     * @required
+     */
+    private Boolean parallelTesting;
+
     public void execute() throws MojoExecutionException {
         if (!outputDirectory.exists()) {
             outputDirectory.mkdirs();
@@ -114,7 +122,7 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
         }
 
         try {
-            ReportBuilder reportBuilder = new ReportBuilder(list, outputDirectory, "", buildNumber, projectName, skippedFails, pendingFails, undefinedFails, missingFails, enableFlashCharts, false, false, "", false, false);
+            ReportBuilder reportBuilder = new ReportBuilder(list, outputDirectory, "", buildNumber, projectName, skippedFails, pendingFails, undefinedFails, missingFails, enableFlashCharts, false, false, "", false, parallelTesting);
             getLog().info("About to generate Cucumber report.");
             reportBuilder.generateReports();
 
