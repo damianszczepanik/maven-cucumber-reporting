@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>net.masterthought</groupId>
     <artifactId>maven-cucumber-reporting</artifactId>
@@ -13,18 +14,12 @@
         <version>7</version>
     </parent>
 
-    <repositories>
-        <repository>
-            <id>repo.bodar.com</id>
-            <url>http://repo.bodar.com</url>
-        </repository>
-    </repositories>
 
     <scm>
-        <connection>scm:git:git@github.com:masterthought/maven-cucumber-reporting-mojo.git</connection>
-        <developerConnection>scm:git:git@github.com:masterthought/maven-cucumber-reporting-mojo.git
+        <connection>scm:git:git@github.com:damianszczepanik/maven-cucumber-reporting-mojo.git</connection>
+        <developerConnection>scm:git:git@github.com:damianszczepanik/maven-cucumber-reporting-mojo.git
         </developerConnection>
-        <url>git@github.com:masterthought/maven-cucumber-reporting-mojo.git</url>
+        <url>git@github.com:damianszczepanik/maven-cucumber-reporting-mojo.git</url>
     </scm>
 
     <description>
@@ -36,11 +31,23 @@
 
     <licenses>
         <license>
-            <comments>Use this project wherever you like</comments>
             <name>LGPL 2.1</name>
             <url>http://www.gnu.org/licenses/lgpl-2.1.html</url>
         </license>
     </licenses>
+
+    <developers>
+        <developer>
+            <id>kingsleyh</id>
+            <name>Kingsley Hendrickse</name>
+            <email>kingsley.hendrickse@gmail.com</email>
+        </developer>
+        <developer>
+            <id>damianszczepanik</id>
+            <name>Damian Szczepanik</name>
+            <email>damianszczepanik@github</email>
+        </developer>
+    </developers>
 
     <profiles>
         <profile>
@@ -48,18 +55,16 @@
 
             <activation>
                 <property>
-                    <!--
-                                 will be set by the release plugin upon performing mvn
-                                 release:perform
-                             -->
+                    <!-- will be set by the release plugin upon performing 
+                        mvn clean deploy -Prelease-sign-artifacts -->
                     <name>performRelease</name>
                     <value>true</value>
                 </property>
             </activation>
 
             <properties>
-                <gpg.keyname>E91DA67C</gpg.keyname>
-                <release.username>kingsleyh</release.username>
+                <gpg.keyname>0738FA8F</gpg.keyname>
+                <release.username>Damian Szczepanik</release.username>
             </properties>
 
             <build>
@@ -68,7 +73,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <version>1.4</version>
+                        <version>1.6</version>
                         <executions>
                             <execution>
                                 <id>sign-artifacts</id>
@@ -91,7 +96,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.5.1</version>
+                <version>3.3</version>
                 <configuration>
                     <source>1.7</source>
                     <target>1.7</target>
@@ -106,34 +111,29 @@
         <dependency>
             <groupId>org.apache.maven</groupId>
             <artifactId>maven-plugin-api</artifactId>
-            <version>2.0</version>
+            <version>3.3.3</version>
         </dependency>
-		<dependency>
-			<groupId>org.hamcrest</groupId>
-			<artifactId>hamcrest-all</artifactId>
-			<version>1.3</version>
-			<scope>test</scope>
-		</dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-all</artifactId>
+            <version>1.3</version>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.10</version>
+            <version>4.12</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-gpg-plugin</artifactId>
-            <version>1.4</version>
+            <version>1.6</version>
         </dependency>
         <dependency>
             <groupId>net.masterthought</groupId>
             <artifactId>cucumber-reporting</artifactId>
-            <version>0.1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.googlecode.totallylazy</groupId>
-            <artifactId>totallylazy</artifactId>
-            <version>1.20</version>
+            <version>0.2.1</version>
         </dependency>
     </dependencies>
 </project>
