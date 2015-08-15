@@ -16,10 +16,10 @@
 
 
     <scm>
-        <connection>scm:git:git@github.com:damianszczepanik/maven-cucumber-reporting-mojo.git</connection>
-        <developerConnection>scm:git:git@github.com:damianszczepanik/maven-cucumber-reporting-mojo.git
+        <connection>scm:git:git@github.com:damianszczepanik/maven-cucumber-reporting.git</connection>
+        <developerConnection>scm:git:git@github.com:damianszczepanik/maven-cucumber-reporting.git
         </developerConnection>
-        <url>git@github.com:damianszczepanik/maven-cucumber-reporting-mojo.git</url>
+        <url>git@github.com:damianszczepanik/maven-cucumber-reporting.git</url>
     </scm>
 
     <description>
