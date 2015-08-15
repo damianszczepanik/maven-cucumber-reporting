@@ -1,3 +1,9 @@
+[![Build Status](https://img.shields.io/travis/damianszczepanik/maven-cucumber-reporting/master.svg)](https://travis-ci.org/damianszczepanik/maven-cucumber-reporting)
+[![Coverage Status](https://img.shields.io/codecov/c/github/damianszczepanik/maven-cucumber-reporting/master.svg)](https://codecov.io/github/damianszczepanik/maven-cucumber-reporting)
+[![Maven Central](https://img.shields.io/maven-central/v/net.masterthought/maven-cucumber-reporting.svg)](http://search.maven.org/#search|gav|1|g%3A%22net.masterthought%22%20AND%20a%3A%22maven-cucumber-reporting%22)
+[![Maven Dependencies](https://www.versioneye.com/user/projects/55cf4ca815ff9b001400006d/badge.svg)](https://www.versioneye.com/user/projects/55cf4ca815ff9b001400006d)
+
+
 Maven mojo for the cucumber-reporting - put this into your pom.xml and run mvn clean install or mvn clean test and cucumber reports will be generated in target/cucumber-html-reports
 
 Read more about the project and configuration here: [maven-cucumber-reports](http://masterthought.net/section/cucumber-reporting)
@@ -16,7 +22,7 @@ Run with: mvn clean install
                 <plugin>
                     <groupId>net.masterthought</groupId>
                     <artifactId>maven-cucumber-reporting</artifactId>
-                    <version>0.0.5</version>
+                    <version>0.2.1</version>
                     <executions>
                         <execution>
                             <id>execution</id>
@@ -41,7 +47,7 @@ You may also need the maven dependency:
         <dependency>
             <groupid>net.masterthought</groupid>
             <artifactid>maven-cucumber-reporting</artifactid>
-            <version>0.0.24</version>
+            <version>0.2.1</version>
         </dependency>
 
 You may also need to add the sonatype repository if it has not yet been synced with the maven central repository:
@@ -52,19 +58,4 @@ You may also need to add the sonatype repository if it has not yet been synced w
                     <url>https://oss.sonatype.org/content/repositories/releases/</url>
                 </repository>
             </repositories>
-
-You may also need to include the Totally Lazy dependency and repository:
-
-       <repositories>
-           <repository>
-               <id>repo.bodar.com</id>
-               <url>http://repo.bodar.com</url>
-           </repository>
-       </repositories>
-
-       <dependency>
-               <groupId>com.googlecode.totallylazy</groupId>
-               <artifactId>totallylazy</artifactId>
-               <version>1.20</version>
-       </dependency>
 
