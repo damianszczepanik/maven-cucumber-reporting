@@ -98,12 +98,13 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
      */
     private Boolean checkBuildResult;
 
+    @Override
     public void execute() throws MojoExecutionException {
         if (!outputDirectory.exists()) {
             outputDirectory.mkdirs();
         }
 
-        List<String> list = new ArrayList<String>();
+        List<String> list = new ArrayList<>();
 		for (File jsonFile : cucumberFiles(cucumberOutput)) {
 			list.add(jsonFile.getAbsolutePath());
 		}
