@@ -4,7 +4,7 @@
     <groupId>net.masterthought</groupId>
     <artifactId>maven-cucumber-reporting</artifactId>
     <packaging>maven-plugin</packaging>
-    <version>0.1.0</version>
+    <version>0.1.1-SNAPSHOT</version>
     <name>maven-cucumber-reporting</name>
     <url>http://maven.apache.org</url>
 
@@ -26,9 +26,9 @@
     </distributionManagement>
 
     <scm>
-        <connection>scm:git:git@github.com:damianszczepanik/maven-cucumber-reporting-mojo.git</connection>
-        <developerConnection>scm:git:git@github.com:damianszczepanik/maven-cucumber-reporting-mojo.git</developerConnection>
-        <url>git@github.com:damianszczepanik/maven-cucumber-reporting-mojo.git</url>
+        <connection>scm:git:git@github.com:damianszczepanik/maven-cucumber-reporting.git</connection>
+        <developerConnection>scm:git:git@github.com:damianszczepanik/maven-cucumber-reporting.git</developerConnection>
+        <url>git@github.com:damianszczepanik/maven-cucumber-reporting.git</url>
     </scm>
 
     <description>
