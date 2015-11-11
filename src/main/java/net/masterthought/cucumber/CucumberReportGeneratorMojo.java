@@ -115,7 +115,7 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
         }
 
         try {
-            ReportBuilder reportBuilder = new ReportBuilder(list, outputDirectory, "", buildNumber, projectName, skippedFails, pendingFails, undefinedFails, missingFails, enableFlashCharts, false, false, "", false, false);
+            ReportBuilder reportBuilder = new ReportBuilder(list, outputDirectory, "", buildNumber, projectName, skippedFails, pendingFails, undefinedFails, missingFails, enableFlashCharts,false, false, false);
             getLog().info("About to generate Cucumber report.");
             reportBuilder.generateReports();
 
