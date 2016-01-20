@@ -33,7 +33,7 @@ Run with: mvn clean install
                                 <projectName>cucumber-jvm-example</projectName>
                                 <outputDirectory>${project.build.directory}/cucumber-html-reports</outputDirectory>
                                 <cucumberOutput>${project.build.directory}/cucumber.json</cucumberOutput>
-                                <enableFlashCharts>false</enableFlashCharts>
+                                <parallelTesting>false</parallelTesting>
                             </configuration>
                         </execution>
                     </executions>
