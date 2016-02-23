@@ -115,12 +115,14 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
         }
 
         try {
-            ReportBuilder reportBuilder = new ReportBuilder(list, outputDirectory, "", buildNumber, projectName, skippedFails, pendingFails, undefinedFails, missingFails, enableFlashCharts, false, false, "", false, false);
+            ReportBuilder reportBuilder = new ReportBuilder(list, outputDirectory, "", buildNumber, projectName, skippedFails,
+                                                            pendingFails, undefinedFails, missingFails, enableFlashCharts, false,
+                                                            false, false);
             getLog().info("About to generate Cucumber report.");
             reportBuilder.generateReports();
 
             if (checkBuildResult) {
-                boolean buildResult = reportBuilder.getBuildStatus();
+                boolean buildResult = reportBuilder.hasBuildPassed();
                 if (!buildResult) {
                     throw new MojoExecutionException("BUILD FAILED - Check Report For Details");
                 }
