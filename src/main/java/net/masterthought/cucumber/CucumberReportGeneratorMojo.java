@@ -22,7 +22,7 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
     /**
      * Name of the project.
      *
-     * @parameter expression="${project.name}"
+     * @parameter property="${project.name}"
      * @required
      */
     private String projectName;
@@ -30,14 +30,14 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
     /**
      * Build number.
      *
-     * @parameter expression="${build.number}" default-value="1"
+     * @parameter property="${build.number}" default-value="1"
      */
     private String buildNumber;
     
     /**
      * Location of the file.
      *
-     * @parameter expression="${project.build.directory}/cucumber-reports"
+     * @parameter property="${project.build.directory}/cucumber-reports"
      * @required
      */
     private File outputDirectory;
@@ -45,7 +45,7 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
     /**
      * Location of the file.
      *
-     * @parameter expression="${project.build.directory}/cucumber.json"
+     * @parameter property="${project.build.directory}/cucumber.json"
      * @required
      */
     private File cucumberOutput;
@@ -53,7 +53,7 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
     /**
      * Skipped fails
      *
-     * @parameter expression="false" default-value="false"
+     * @parameter property="false" default-value="false"
      * @required
      */
     private Boolean skippedFails;
@@ -61,7 +61,7 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
     /**
      * Undefined fails
      *
-     * @parameter expression="false" default-value="false"
+     * @parameter property="false" default-value="false"
      * @required
      */
     private Boolean undefinedFails;
@@ -69,7 +69,7 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
     /**
      * Pending fails
      *
-     * @parameter expression="false" default-value="false"
+     * @parameter property="false" default-value="false"
      * @required
      */
     private Boolean pendingFails;
@@ -77,26 +77,26 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
     /**
      * Missing fails
      *
-     * @parameter expression="false" default-value="false"
+     * @parameter property="false" default-value="false"
      * @required
      */
     private Boolean missingFails;
 
     /**
-     * Enable Flash Charts.
-     *
-     * @parameter expression="true"
-     * @required
-     */
-    private Boolean enableFlashCharts;
-
-    /**
      * Skip check for failed build result
      *
-     * @parameter expression="true" default-value="true"
+     * @parameter property="true" default-value="true"
      * @required
      */
     private Boolean checkBuildResult;
+
+    /**
+     * Build reports from parallel tests
+     *
+     * @parameter property="true" default-value="false"
+     * @required
+     */
+    private Boolean parallelTesting;
 
     @Override
     public void execute() throws MojoExecutionException {
@@ -115,12 +115,17 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
         }
 
         try {
-            ReportBuilder reportBuilder = new ReportBuilder(list, outputDirectory, "", buildNumber, projectName, skippedFails, pendingFails, undefinedFails, missingFails, enableFlashCharts, false, false, "", false, false);
+            Configuration configuration = new Configuration(outputDirectory,projectName);
+            configuration.setBuildNumber(buildNumber);
+            configuration.setStatusFlags(skippedFails,pendingFails,undefinedFails,missingFails);
+            configuration.setParallelTesting(parallelTesting);
+
+            ReportBuilder reportBuilder = new ReportBuilder(list,configuration);
             getLog().info("About to generate Cucumber report.");
             reportBuilder.generateReports();
 
             if (checkBuildResult) {
-                boolean buildResult = reportBuilder.getBuildStatus();
+                boolean buildResult = reportBuilder.hasBuildPassed();
                 if (!buildResult) {
                     throw new MojoExecutionException("BUILD FAILED - Check Report For Details");
                 }
