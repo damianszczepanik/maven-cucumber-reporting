@@ -1,7 +1,12 @@
 language: java
 
-jdk:
+cache:
+  directories:
+  - ~/.m2
 
+jdk:
   - oraclejdk7 
   - openjdk7
   - oraclejdk8
+
+script: mvn clean package

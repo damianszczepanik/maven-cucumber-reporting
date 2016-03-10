@@ -1,6 +1,6 @@
 [![Build Status](https://img.shields.io/travis/damianszczepanik/maven-cucumber-reporting/master.svg)](https://travis-ci.org/damianszczepanik/maven-cucumber-reporting)
 [![Maven Central](https://img.shields.io/maven-central/v/net.masterthought/maven-cucumber-reporting.svg)](http://search.maven.org/#search|gav|1|g%3A%22net.masterthought%22%20AND%20a%3A%22maven-cucumber-reporting%22)
-[![Maven Dependencies](https://www.versioneye.com/user/projects/55cf4ca815ff9b001400006d/badge.svg)](https://www.versioneye.com/user/projects/55cf4ca815ff9b001400006d?child=summary)
+[![Maven Dependencies](https://www.versioneye.com/user/projects/55d0942d15ff9b00220000f6/badge.svg)](https://www.versioneye.com/user/projects/55d0942d15ff9b00220000f6?child=summary)
 
 
 Maven mojo for the cucumber-reporting - put this into your pom.xml and run mvn clean install or mvn clean test and cucumber reports will be generated in target/cucumber-html-reports
@@ -21,7 +21,7 @@ Run with: mvn clean install
                 <plugin>
                     <groupId>net.masterthought</groupId>
                     <artifactId>maven-cucumber-reporting</artifactId>
-                    <version>0.0.5</version>
+                    <version>(check version above)</version>
                     <executions>
                         <execution>
                             <id>execution</id>
@@ -46,7 +46,7 @@ You may also need the maven dependency:
         <dependency>
             <groupid>net.masterthought</groupid>
             <artifactid>maven-cucumber-reporting</artifactid>
-            <version>0.2.1</version> <!-- check version with https://github.com/damianszczepanik/cucumber-reporting -->
+            <version>( check version with https://github.com/damianszczepanik/cucumber-reporting )</version>
         </dependency>
 
 You may also need to add the sonatype repository if it has not yet been synced with the maven central repository:
