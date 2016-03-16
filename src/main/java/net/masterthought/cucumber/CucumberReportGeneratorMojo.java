@@ -22,7 +22,7 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
     /**
      * Name of the project.
      *
-     * @parameter property="${project.name}"
+     * @parameter property="project.name"
      * @required
      */
     private String projectName;
@@ -30,14 +30,14 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
     /**
      * Build number.
      *
-     * @parameter property="${build.number}" default-value="1"
+     * @parameter property="build.number" default-value="1"
      */
     private String buildNumber;
     
     /**
      * Location of the file.
      *
-     * @parameter property="${project.build.directory}/cucumber-reports"
+     * @parameter property="project.build.directory/cucumber-reports"
      * @required
      */
     private File outputDirectory;
@@ -45,7 +45,7 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
     /**
      * Location of the file.
      *
-     * @parameter property="${project.build.directory}/cucumber.json"
+     * @parameter property="project.build.directory/cucumber.json"
      * @required
      */
     private File cucumberOutput;
@@ -115,12 +115,12 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
         }
 
         try {
-            Configuration configuration = new Configuration(outputDirectory,projectName);
+            Configuration configuration = new Configuration(outputDirectory, projectName);
             configuration.setBuildNumber(buildNumber);
-            configuration.setStatusFlags(skippedFails,pendingFails,undefinedFails,missingFails);
+            configuration.setStatusFlags(skippedFails, pendingFails, undefinedFails, missingFails);
             configuration.setParallelTesting(parallelTesting);
 
-            ReportBuilder reportBuilder = new ReportBuilder(list,configuration);
+            ReportBuilder reportBuilder = new ReportBuilder(list, configuration);
             getLog().info("About to generate Cucumber report.");
             reportBuilder.generateReports();
 
