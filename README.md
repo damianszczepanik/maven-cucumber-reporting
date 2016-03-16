@@ -3,7 +3,7 @@
 [![Maven Dependencies](https://www.versioneye.com/user/projects/55d0942d15ff9b00220000f6/badge.svg)](https://www.versioneye.com/user/projects/55d0942d15ff9b00220000f6?child=summary)
 
 
-Maven mojo for the cucumber-reporting - put this into your pom.xml and run mvn clean install or mvn clean test and cucumber reports will be generated in target/cucumber-html-reports
+Maven mojo for the cucumber-reporting - put this into your pom.xml and run `mvn verify` and cucumber reports will be generated in `target/cucumber-html-reports`
 
 Read more about the project and configuration here: [maven-cucumber-reports](https://github.com/damianszczepanik/cucumber-reporting)
 
@@ -44,8 +44,8 @@ Run with: mvn clean install
 You may also need the maven dependency:
 
         <dependency>
-            <groupid>net.masterthought</groupid>
-            <artifactid>maven-cucumber-reporting</artifactid>
+            <groupId>net.masterthought</groupId>
+            <artifactId>maven-cucumber-reporting</artifactId>
             <version>( check version with https://github.com/damianszczepanik/cucumber-reporting )</version>
         </dependency>
 
