@@ -37,7 +37,7 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
     /**
      * Location of the file.
      *
-     * @parameter property="project.build.directory/cucumber-reports"
+     * @parameter default-value="${project.build.directory}/cucumber-reports"
      * @required
      */
     private File outputDirectory;
@@ -45,7 +45,7 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
     /**
      * Location of the file.
      *
-     * @parameter property="project.build.directory/cucumber.json"
+     * @parameter default-value="${project.build.directory}/cucumber.json"
      * @required
      */
     private File cucumberOutput;
@@ -53,7 +53,7 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
     /**
      * Skipped fails
      *
-     * @parameter property="false" default-value="false"
+     * @parameter default-value="false"
      * @required
      */
     private Boolean skippedFails;
@@ -61,7 +61,7 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
     /**
      * Undefined fails
      *
-     * @parameter property="false" default-value="false"
+     * @parameter default-value="false"
      * @required
      */
     private Boolean undefinedFails;
@@ -69,7 +69,7 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
     /**
      * Pending fails
      *
-     * @parameter property="false" default-value="false"
+     * @parameter default-value="false"
      * @required
      */
     private Boolean pendingFails;
@@ -77,7 +77,7 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
     /**
      * Missing fails
      *
-     * @parameter property="false" default-value="false"
+     * @parameter default-value="false"
      * @required
      */
     private Boolean missingFails;
@@ -85,7 +85,7 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
     /**
      * Skip check for failed build result
      *
-     * @parameter property="true" default-value="true"
+     * @parameter default-value="true"
      * @required
      */
     private Boolean checkBuildResult;
