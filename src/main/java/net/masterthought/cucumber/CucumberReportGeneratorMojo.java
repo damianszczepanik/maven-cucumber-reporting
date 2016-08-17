@@ -1,15 +1,15 @@
 package net.masterthought.cucumber;
 
-import org.apache.commons.io.FileUtils;
-import org.apache.maven.plugin.AbstractMojo;
-import org.apache.maven.plugin.MojoExecutionException;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+
+import org.apache.commons.io.FileUtils;
+import org.apache.maven.plugin.AbstractMojo;
+import org.apache.maven.plugin.MojoExecutionException;
 
 /**
  * Goal which generates a Cucumber Report.
@@ -75,14 +75,6 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
     private Boolean pendingFails;
 
     /**
-     * Missing fails
-     *
-     * @parameter default-value="false"
-     * @required
-     */
-    private Boolean missingFails;
-
-    /**
      * Skip check for failed build result
      *
      * @parameter default-value="true"
@@ -117,7 +109,7 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
         try {
             Configuration configuration = new Configuration(outputDirectory, projectName);
             configuration.setBuildNumber(buildNumber);
-            configuration.setStatusFlags(skippedFails, pendingFails, undefinedFails, missingFails);
+            configuration.setStatusFlags(skippedFails, pendingFails, undefinedFails);
             configuration.setParallelTesting(parallelTesting);
 
             ReportBuilder reportBuilder = new ReportBuilder(list, configuration);
