@@ -51,30 +51,6 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
     private File cucumberOutput;
 
     /**
-     * Skipped fails
-     *
-     * @parameter default-value="false"
-     * @required
-     */
-    private Boolean skippedFails;
-
-    /**
-     * Undefined fails
-     *
-     * @parameter default-value="false"
-     * @required
-     */
-    private Boolean undefinedFails;
-
-    /**
-     * Pending fails
-     *
-     * @parameter default-value="false"
-     * @required
-     */
-    private Boolean pendingFails;
-
-    /**
      * Skip check for failed build result
      *
      * @parameter default-value="true"
@@ -109,16 +85,14 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
         try {
             Configuration configuration = new Configuration(outputDirectory, projectName);
             configuration.setBuildNumber(buildNumber);
-            configuration.setStatusFlags(skippedFails, pendingFails, undefinedFails);
             configuration.setParallelTesting(parallelTesting);
 
             ReportBuilder reportBuilder = new ReportBuilder(list, configuration);
             getLog().info("About to generate Cucumber report.");
-            reportBuilder.generateReports();
+            Reportable report = reportBuilder.generateReports();
 
             if (checkBuildResult) {
-                boolean buildResult = reportBuilder.hasBuildPassed();
-                if (!buildResult) {
+                if (report == null) {
                     throw new MojoExecutionException("BUILD FAILED - Check Report For Details");
                 }
             }
