@@ -12,12 +12,9 @@ Run with: mvn clean install
      <build>
             <plugins>
                 <plugin>
-				    <groupId>org.apache.maven.plugins</groupId>
-				    <artifactId>maven-surefire-plugin</artifactId>
-				    <configuration>
-				        <testFailureIgnore>true</testFailureIgnore>
-				    </configuration>
-				</plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                </plugin>
                 <plugin>
                     <groupId>net.masterthought</groupId>
                     <artifactId>maven-cucumber-reporting</artifactId>
@@ -57,4 +54,3 @@ You may also need to add the sonatype repository if it has not yet been synced w
                     <url>https://oss.sonatype.org/content/repositories/releases/</url>
                 </repository>
             </repositories>
-
