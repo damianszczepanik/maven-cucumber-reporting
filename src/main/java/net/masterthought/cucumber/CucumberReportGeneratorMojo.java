@@ -6,10 +6,14 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections.MapUtils;
 import org.apache.commons.io.FileUtils;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
+import org.codehaus.plexus.util.StringUtils;
 
 /**
  * Goal which generates a Cucumber Report.
@@ -51,7 +55,7 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
     private File cucumberOutput;
 
     /**
-     * Skip check for failed build result
+     * Skip check for failed build result.
      *
      * @parameter default-value="true"
      * @required
@@ -59,12 +63,19 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
     private Boolean checkBuildResult;
 
     /**
-     * Build reports from parallel tests
+     * Build reports from parallel tests.
      *
      * @parameter property="true" default-value="false"
      * @required
      */
     private Boolean parallelTesting;
+
+    /**
+     * Additional attributes to classify current test run.
+     *
+     * @parameter
+     */
+    private Map<String, String> classifications;
 
     @Override
     public void execute() throws MojoExecutionException {
@@ -86,15 +97,18 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
             Configuration configuration = new Configuration(outputDirectory, projectName);
             configuration.setBuildNumber(buildNumber);
             configuration.setParallelTesting(parallelTesting);
+            if (!MapUtils.isEmpty(classifications)) {
+                for (Map.Entry<String, String> entry : classifications.entrySet()) {
+                    configuration.addClassifications(StringUtils.capitalise(entry.getKey()), entry.getValue());
+                }
+            }
 
             ReportBuilder reportBuilder = new ReportBuilder(list, configuration);
             getLog().info("About to generate Cucumber report.");
             Reportable report = reportBuilder.generateReports();
 
-            if (checkBuildResult) {
-                if (report == null) {
-                    throw new MojoExecutionException("BUILD FAILED - Check Report For Details");
-                }
+            if (checkBuildResult && report == null) {
+                throw new MojoExecutionException("BUILD FAILED - Check Report For Details");
             }
 
         } catch (Exception e) {
