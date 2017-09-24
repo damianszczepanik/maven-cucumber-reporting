@@ -8,7 +8,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.io.FileUtils;
 import org.apache.maven.plugin.AbstractMojo;
@@ -47,12 +46,19 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
     private File outputDirectory;
     
     /**
-     * Location of the file.
+     * Location of the JSON file to process.
      *
      * @parameter default-value="${project.build.directory}/cucumber.json"
      * @required
+     * @deprecated
      */
     private File cucumberOutput;
+
+    /**
+     * List of JSON files to process
+     * @parameter
+     */
+    private List<String> jsonFiles = Collections.emptyList();
 
     /**
      * Skip check for failed build result.
@@ -83,15 +89,13 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
             outputDirectory.mkdirs();
         }
 
+        // this is deprecated but processing to keep backwards compatibility
         List<String> list = new ArrayList<>();
 		for (File jsonFile : cucumberFiles(cucumberOutput)) {
 			list.add(jsonFile.getAbsolutePath());
 		}
 
-        if (list.isEmpty()) {
-            getLog().warn(cucumberOutput.getAbsolutePath() + " does not exist.");
-            return;
-        }
+		list.addAll(jsonFiles);
 
         try {
             Configuration configuration = new Configuration(outputDirectory, projectName);

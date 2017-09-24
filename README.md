@@ -3,11 +3,11 @@
 [![Maven Dependencies](https://www.versioneye.com/user/projects/55d0942d15ff9b00220000f6/badge.svg)](https://www.versioneye.com/user/projects/55d0942d15ff9b00220000f6?child=summary)
 
 
-Maven mojo for the cucumber-reporting - put this into your pom.xml and run `mvn verify` and cucumber reports will be generated in `target/cucumber-html-reports`
+Maven mojo for the cucumber-reporting - put this into your `pom.xml` and run `mvn verify` so cucumber reports will be generated in `target/cucumber-html-reports`
 
 Read more about the project and configuration here: [maven-cucumber-reports](https://github.com/damianszczepanik/cucumber-reporting)
 
-Run with: mvn clean install
+Run with: mvn verify
 
      <build>
             <plugins>
@@ -28,9 +28,13 @@ Run with: mvn clean install
                             </goals>
                             <configuration>
                                 <projectName>cucumber-jvm-example</projectName>
-                                <outputDirectory>${project.build.directory}/cucumber-html-reports</outputDirectory>
+                                <outputDirectory>${project.build.directory}</outputDirectory>
+                                <!-- this parameter is deprecated, use jsonFiles instead -->
                                 <cucumberOutput>${project.build.directory}/cucumber.json</cucumberOutput>
-                                <parallelTesting>false</parallelTesting>
+                                <jsonFiles>
+                                    <param>sample.json</param>
+                                    <param>other.json</param>
+                                </jsonFiles>                                <parallelTesting>false</parallelTesting>
                             </configuration>
                         </execution>
                     </executions>
@@ -38,19 +42,3 @@ Run with: mvn clean install
             </plugins>
         </build>
 
-You may also need the maven dependency:
-
-        <dependency>
-            <groupId>net.masterthought</groupId>
-            <artifactId>maven-cucumber-reporting</artifactId>
-            <version>( check version with https://github.com/damianszczepanik/cucumber-reporting )</version>
-        </dependency>
-
-You may also need to add the sonatype repository if it has not yet been synced with the maven central repository:
-
-           <repositories>
-                <repository>
-                    <id>sonatype-releases</id>
-                    <url>https://oss.sonatype.org/content/repositories/releases/</url>
-                </repository>
-            </repositories>
