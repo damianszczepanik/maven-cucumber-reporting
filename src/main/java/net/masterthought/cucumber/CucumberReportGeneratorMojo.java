@@ -111,7 +111,7 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
             getLog().info("About to generate Cucumber report.");
             Reportable report = reportBuilder.generateReports();
 
-            if (checkBuildResult && report == null) {
+            if (checkBuildResult && (report == null || report.getFailedSteps() > 0)) {
                 throw new MojoExecutionException("BUILD FAILED - Check Report For Details");
             }
 
