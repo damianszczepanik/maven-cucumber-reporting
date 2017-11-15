@@ -14,6 +14,9 @@ Run with: mvn verify
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
+                    <configuration>
+                        <testFailureIgnore>true</testFailureIgnore>
+                    </configuration>
                 </plugin>
                 <plugin>
                     <groupId>net.masterthought</groupId>
@@ -34,7 +37,8 @@ Run with: mvn verify
                                 <jsonFiles>
                                     <param>sample.json</param>
                                     <param>other.json</param>
-                                </jsonFiles>                                <parallelTesting>false</parallelTesting>
+                                </jsonFiles>
+                                <parallelTesting>false</parallelTesting>
                             </configuration>
                         </execution>
                     </executions>
