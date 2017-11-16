@@ -1,18 +1,18 @@
 package net.masterthought.cucumber;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.io.FileUtils;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.codehaus.plexus.util.StringUtils;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.logging.Logger;
 
 /**
  * Goal which generates a Cucumber Report.
@@ -95,7 +95,14 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
 			list.add(jsonFile.getAbsolutePath());
 		}
 
-		list.addAll(jsonFiles);
+        for (final String file : jsonFiles) {
+            final File f = new File(file);
+            if (f.exists() && f.isFile()) {
+                list.add(file);
+            } else {
+                Logger.getLogger(this.getClass().getName()).warning("Did not find report: " + file);
+            }
+        }
 
         try {
             Configuration configuration = new Configuration(outputDirectory, projectName);
@@ -127,7 +134,7 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
             return Collections.emptyList();
         }
 		if (file.isFile()) {
-			return Arrays.asList(file);
+			return Collections.singletonList(file);
 		}
 		return FileUtils.listFiles(file, new String[] {"json"}, true);
 	}
