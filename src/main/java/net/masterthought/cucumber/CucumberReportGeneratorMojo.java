@@ -12,7 +12,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Logger;
 
 /**
  * Goal which generates a Cucumber Report.
@@ -100,8 +99,13 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
             if (f.exists() && f.isFile()) {
                 list.add(file);
             } else {
-                Logger.getLogger(this.getClass().getName()).warning("Did not find report: " + file);
+                getLog().warn(String.format("Did not find report: %1$s", file));
             }
+        }
+
+        if (list.isEmpty()) {
+            getLog().warn(String.format("Did not find any JSON report in: %1$s", outputDirectory));
+            return;
         }
 
         try {
