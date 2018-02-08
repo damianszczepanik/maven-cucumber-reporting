@@ -25,7 +25,7 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
     /**
      * Name of the project.
      *
-     * @parameter property="project.name"
+     * @parameter property="projectName"
      * @required
      */
     private String projectName;
@@ -33,7 +33,7 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
     /**
      * Build number.
      *
-     * @parameter property="build.number" default-value="1"
+     * @parameter property="buildNumber" default-value="1"
      */
     private String buildNumber;
     
@@ -71,7 +71,7 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
     /**
      * Build reports from parallel tests.
      *
-     * @parameter property="true" default-value="false"
+     * @parameter property="parallelTesting" default-value="false"
      * @required
      */
     private Boolean parallelTesting;
