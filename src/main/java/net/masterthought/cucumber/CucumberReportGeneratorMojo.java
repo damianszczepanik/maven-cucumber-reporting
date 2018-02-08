@@ -75,6 +75,14 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
      * @required
      */
     private Boolean parallelTesting;
+    
+    /**
+     * Build Pass threadhold
+     *
+     * @parameter property="true" default-value="100"
+     * @required
+     */
+    private int passPercentThreshold=100;
 
     /**
      * Additional attributes to classify current test run.
@@ -111,9 +119,18 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
             getLog().info("About to generate Cucumber report.");
             Reportable report = reportBuilder.generateReports();
 
-            if (checkBuildResult && (report == null || report.getFailedSteps() > 0)) {
-                throw new MojoExecutionException("BUILD FAILED - Check Report For Details");
-            }
+			if (checkBuildResult && null != report) {
+				if (report.getScenarios() > report.getPassedScenarios()) {
+					float percent = ((report.getScenarios() - report.getFailedScenarios()) / report.getScenarios())
+							* 100;
+					getLog().info("Test Pass percent : " + percent + "% , PassPercentThreshold : "
+							+ passPercentThreshold + "%");
+					if (passPercentThreshold > percent) {
+						throw new MojoExecutionException("BUILD FAILED - Check Report For Details");
+					}
+				}
+
+			}
 
         } catch (Exception e) {
             throw new MojoExecutionException("Error Found:", e);
