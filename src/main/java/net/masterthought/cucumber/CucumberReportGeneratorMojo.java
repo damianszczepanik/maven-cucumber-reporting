@@ -79,7 +79,7 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
     /**
      * Build Pass threadhold
      *
-     * @parameter property="true" default-value="100"
+     * @parameter default-value="100"
      * @required
      */
     private int passPercentThreshold=100;
