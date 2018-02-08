@@ -124,7 +124,7 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
 					getLog().info("Total tests : " + report.getScenarios() );
 					getLog().info("Pass Tests : " + report.getFailedScenarios() );
 				
-					float percent = ((report.getScenarios() - report.getFailedScenarios()) / report.getScenarios())* 100;
+					float percent = (report.getPassedScenarios() / report.getScenarios())* 100;
 					getLog().info("Test Pass percent : " + percent + "% , PassPercentThreshold : "
 							+ passPercentThreshold + "%");
 					if (passPercentThreshold > percent) {
