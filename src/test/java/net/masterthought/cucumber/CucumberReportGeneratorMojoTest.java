@@ -9,7 +9,6 @@ import java.util.Collection;
 import static net.masterthought.cucumber.CucumberReportGeneratorMojo.cucumberFiles;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.assertEquals;
 
 public class CucumberReportGeneratorMojoTest {
 
@@ -36,14 +35,6 @@ public class CucumberReportGeneratorMojoTest {
 
 		//then the list should be empty
 		assertThat(files, hasSize(0));
-	}
-	
-	@Test
-	public void percentCalculation() {
-		float total = 100;
-		float pass = 34;
-		float percent = (pass/total)*100;
-		System.out.println(percent);
 	}
 
 	private File testResource(String relPath) throws URISyntaxException {
