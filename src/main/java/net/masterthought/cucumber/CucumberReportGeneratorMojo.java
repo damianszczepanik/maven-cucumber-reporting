@@ -119,17 +119,15 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
             getLog().info("About to generate Cucumber report.");
             Reportable report = reportBuilder.generateReports();
 
-			if (checkBuildResult && null != report) {
-				if (report.getScenarios() > report.getPassedScenarios()) {
-					float totalScenarios = report.getScenarios();
-					float passedScenarios = report.getPassedScenarios();
-					getLog().info("Total Scenarios : " + totalScenarios + " , Passed Scenarios :  "+ passedScenarios);
-					float percent = ((passedScenarios / totalScenarios)*100);
-					getLog().info("Test Pass percent : " + percent + "% , PassPercentThreshold : "
-							+ passPercentThreshold + "%");
-					if (passPercentThreshold > percent) {
-						throw new MojoExecutionException("BUILD FAILED - Check Report For Details");
-					}
+			if (checkBuildResult && null != report && report.getScenarios() > report.getPassedScenarios()) {
+				float totalScenarios = report.getScenarios();
+				float passedScenarios = report.getPassedScenarios();
+				getLog().info("Total Scenarios : " + totalScenarios + " , Passed Scenarios :  " + passedScenarios);
+				float percent = ((passedScenarios / totalScenarios) * 100);
+				getLog().info(
+						"Test Pass percent : " + percent + "% , PassPercentThreshold : " + passPercentThreshold + "%");
+				if (passPercentThreshold > percent) {
+					throw new MojoExecutionException("BUILD FAILED - Check Report For Details");
 				}
 
 			}
