@@ -12,6 +12,7 @@ import org.apache.commons.collections.MapUtils;
 import org.apache.commons.io.FileUtils;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.plugin.MojoFailureException;
 import org.codehaus.plexus.util.StringUtils;
 
 /**
@@ -77,7 +78,7 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
     private Boolean parallelTesting;
     
     /**
-     * Build Pass threadhold
+     * Build Pass threshold
      *
      * @parameter default-value="100"
      * @required
@@ -123,11 +124,12 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
 				float totalScenarios = report.getScenarios();
 				float passedScenarios = report.getPassedScenarios();
 				getLog().info("Total Scenarios : " + totalScenarios + " , Passed Scenarios :  " + passedScenarios);
-				float percent = ((passedScenarios / totalScenarios) * 100);
+				float percent = (passedScenarios / totalScenarios) * 100;
 				getLog().info(
 						"Test Pass percent : " + percent + "% , PassPercentThreshold : " + passPercentThreshold + "%");
 				if (passPercentThreshold > percent) {
-					throw new MojoExecutionException("BUILD FAILED - Check Report For Details");
+					throw new MojoFailureException("BUILD FAILED - Pass Percent of Tests is :" + percent
+							+ " which is less than defined Threshold of " + passPercentThreshold);
 				}
 
 			}
