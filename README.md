@@ -32,12 +32,15 @@ Run with: mvn verify
                             <configuration>
                                 <projectName>cucumber-jvm-example</projectName>
                                 <outputDirectory>${project.build.directory}</outputDirectory>
-                                <!-- this parameter is deprecated, use jsonFiles instead -->
-                                <cucumberOutput>${project.build.directory}/cucumber.json</cucumberOutput>
                                 <jsonFiles>
-                                    <param>sample.json</param>
-                                    <param>other.json</param>
+                                    <!-- supports wildcard or name pattern -->
+                                    <param>**/*.json</param>
                                 </jsonFiles>
+                                <classificationFiles>
+                                        <!-- supports wildcard or name pattern -->
+                                        <param>sample.properties</param>
+                                        <param>other.properties</param>
+                                </classificationFiles>
                                 <parallelTesting>false</parallelTesting>
                             </configuration>
                         </execution>

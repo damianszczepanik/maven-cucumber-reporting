@@ -2,16 +2,13 @@ package net.masterthought.cucumber;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.MapUtils;
-import org.apache.commons.io.FileUtils;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
+import org.codehaus.plexus.util.DirectoryScanner;
 import org.codehaus.plexus.util.StringUtils;
 
 /**
@@ -44,21 +41,19 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
      * @required
      */
     private File outputDirectory;
-    
-    /**
-     * Location of the JSON file to process.
-     *
-     * @parameter default-value="${project.build.directory}/cucumber.json"
-     * @required
-     * @deprecated
-     */
-    private File cucumberOutput;
 
     /**
-     * List of JSON files to process
+     * Array of JSON files to process
+     * @parameter
+     * @required
+     */
+    private String[] jsonFiles;
+
+    /**
+     * Array of PROPERTY files to process
      * @parameter
      */
-    private List<String> jsonFiles = Collections.emptyList();
+    private String[] classificationFiles;
 
     /**
      * Skip check for failed build result.
@@ -89,13 +84,11 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
             outputDirectory.mkdirs();
         }
 
-        // this is deprecated but processing to keep backwards compatibility
-        List<String> list = new ArrayList<>();
-		for (File jsonFile : cucumberFiles(cucumberOutput)) {
-			list.add(jsonFile.getAbsolutePath());
-		}
+        // Find all json files that match json file include pattern...
+        List<String> jsonFilesToProcess = genericFindFiles(outputDirectory,jsonFiles);
 
-		list.addAll(jsonFiles);
+        // Find all json files that match classification file include pattern...
+        List<String> classificationFilesToProcess = genericFindFiles(outputDirectory,classificationFiles);
 
         try {
             Configuration configuration = new Configuration(outputDirectory, projectName);
@@ -106,8 +99,11 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
                     configuration.addClassifications(StringUtils.capitalise(entry.getKey()), entry.getValue());
                 }
             }
+            if(CollectionUtils.isNotEmpty(classificationFilesToProcess)) {
+                configuration.addClassificationFiles(classificationFilesToProcess);
+            }
 
-            ReportBuilder reportBuilder = new ReportBuilder(list, configuration);
+            ReportBuilder reportBuilder = new ReportBuilder(jsonFilesToProcess, configuration);
             getLog().info("About to generate Cucumber report.");
             Reportable report = reportBuilder.generateReports();
 
@@ -120,15 +116,21 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
         }
     }
 
-	// Normally, I'd keep this private and use mocks for testing the public contract.
-	// I'm not sure that the author wants to get that serious with this..
-	static Collection<File> cucumberFiles(File file) throws MojoExecutionException {
-		if (!file.exists()) {
-            return Collections.emptyList();
+    static List<String> genericFindFiles(File targetDirectory, String[] fileIncludePattern) {
+        DirectoryScanner scanner = new DirectoryScanner();
+        scanner.setIncludes(fileIncludePattern);
+        scanner.setBasedir(targetDirectory);
+        scanner.scan();
+        String[] files = scanner.getIncludedFiles();
+        return fullPathToFiles(files, targetDirectory);
+    }
+
+    private static List<String> fullPathToFiles(String[] files, File targetDirectory) {
+        List<String> fullPathList = new ArrayList<>();
+        for (String file : files) {
+            fullPathList.add(new File(targetDirectory, file).getAbsolutePath());
         }
-		if (file.isFile()) {
-			return Arrays.asList(file);
-		}
-		return FileUtils.listFiles(file, new String[] {"json"}, true);
-	}
+        return fullPathList;
+    }
+
 }
