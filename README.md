@@ -31,11 +31,16 @@ Run with: mvn verify
                             </goals>
                             <configuration>
                                 <projectName>cucumber-jvm-example</projectName>
+                                <!-- output directory for the generated report -->
                                 <outputDirectory>${project.build.directory}</outputDirectory>
+                                <!-- optional, defaults to outputDirectory if not specified -->
+                                <inputDirectory>${project.build.directory}/jsonReports</inputDirectory>
                                 <jsonFiles>
                                     <!-- supports wildcard or name pattern -->
                                     <param>**/*.json</param>
                                 </jsonFiles>
+                                <!-- optional, defaults to outputDirectory if not specified -->
+                                <classificationDirectory>${project.build.directory}/classifications</classificationDirectory>
                                 <classificationFiles>
                                         <!-- supports wildcard or name pattern -->
                                         <param>sample.properties</param>

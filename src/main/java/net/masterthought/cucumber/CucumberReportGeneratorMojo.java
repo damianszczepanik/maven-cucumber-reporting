@@ -33,9 +33,9 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
      * @parameter property="build.number" default-value="1"
      */
     private String buildNumber;
-    
+
     /**
-     * Location of the file.
+     * Location to output the HTML report to.
      *
      * @parameter default-value="${project.build.directory}/cucumber-reports"
      * @required
@@ -43,11 +43,31 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
     private File outputDirectory;
 
     /**
+     * Location of the Cucumber JSON files to generate the report from.
+     * Files in this directory will be matched against the patterns specified
+     * in the jsonFiles property.
+     * If not specified, defaults to the same value as outputDirectory.
+     *
+     * @parameter
+     */
+    private File inputDirectory;
+
+    /**
      * Array of JSON files to process
      * @parameter
      * @required
      */
     private String[] jsonFiles;
+
+    /**
+     * Location of the classification files to add to the report.
+     * Files in this directory will be matched against the patterns specified
+     * in the classificationFiles property.
+     * If not specified, defaults to the same value as outputDirectory.
+     *
+     * @parameter
+     */
+    private File classificationDirectory;
 
     /**
      * Array of PROPERTY files to process
@@ -80,15 +100,24 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
 
     @Override
     public void execute() throws MojoExecutionException {
+
+        if (inputDirectory == null) {
+            inputDirectory = outputDirectory;
+        }
+
+        if (classificationDirectory == null) {
+            classificationDirectory = outputDirectory;
+        }
+
         if (!outputDirectory.exists()) {
             outputDirectory.mkdirs();
         }
 
         // Find all json files that match json file include pattern...
-        List<String> jsonFilesToProcess = genericFindFiles(outputDirectory,jsonFiles);
+        List<String> jsonFilesToProcess = genericFindFiles(inputDirectory,jsonFiles);
 
         // Find all json files that match classification file include pattern...
-        List<String> classificationFilesToProcess = genericFindFiles(outputDirectory,classificationFiles);
+        List<String> classificationFilesToProcess = genericFindFiles(classificationDirectory,classificationFiles);
 
         try {
             Configuration configuration = new Configuration(outputDirectory, projectName);
