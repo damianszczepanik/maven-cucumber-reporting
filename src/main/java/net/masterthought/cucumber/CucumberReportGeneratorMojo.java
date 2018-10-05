@@ -98,8 +98,20 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
      */
     private Map<String, String> classifications;
 
+    /**
+     * Set this to "true" to bypass generation of Cucumber Reports entirely.
+     *
+     * @parameter property="skip" default-value="false"
+     */
+    private boolean skip;
+
     @Override
     public void execute() throws MojoExecutionException {
+
+        if (skip) {
+            getLog().info("Cucumber report generation is skipped.");
+            return;
+        }
 
         if (inputDirectory == null) {
             inputDirectory = outputDirectory;
