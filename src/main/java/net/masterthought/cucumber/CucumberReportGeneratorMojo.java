@@ -101,7 +101,7 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
     /**
      * Set this to "true" to bypass generation of Cucumber Reports entirely.
      *
-     * @parameter property="skip" default-value="false"
+     * @parameter property="cucumber.report.skip" default-value="false"
      */
     private boolean skip;
 
