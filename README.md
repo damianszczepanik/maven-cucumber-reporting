@@ -31,6 +31,8 @@ Run with: mvn verify
                             </goals>
                             <configuration>
                                 <projectName>cucumber-jvm-example</projectName>
+                                <!-- optional, per documentation set this to "true" to bypass generation of Cucumber Reports entirely, defaults to false if not specified -->
+                                <skip>false</skip>
                                 <!-- output directory for the generated report -->
                                 <outputDirectory>${project.build.directory}</outputDirectory>
                                 <!-- optional, defaults to outputDirectory if not specified -->
