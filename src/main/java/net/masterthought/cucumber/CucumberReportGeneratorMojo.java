@@ -11,6 +11,8 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.codehaus.plexus.util.DirectoryScanner;
 import org.codehaus.plexus.util.StringUtils;
 
+import net.masterthought.cucumber.reducers.ReducingMethod;
+
 /**
  * Goal which generates a Cucumber Report.
  *
@@ -134,7 +136,7 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
         try {
             Configuration configuration = new Configuration(outputDirectory, projectName);
             configuration.setBuildNumber(buildNumber);
-            configuration.setParallelTesting(parallelTesting);
+            configuration.addReducingMethod(ReducingMethod.MERGE_FEATURES_BY_ID);
             if (!MapUtils.isEmpty(classifications)) {
                 for (Map.Entry<String, String> entry : classifications.entrySet()) {
                     configuration.addClassifications(StringUtils.capitalise(entry.getKey()), entry.getValue());
