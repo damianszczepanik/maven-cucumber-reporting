@@ -4,8 +4,11 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import edu.emory.mathcs.backport.java.util.Collections;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.MapUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.codehaus.plexus.util.DirectoryScanner;
@@ -160,6 +163,9 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
     }
 
     static List<String> genericFindFiles(File targetDirectory, String[] fileIncludePattern) {
+        if (ArrayUtils.isEmpty(fileIncludePattern)) {
+            return Collections.emptyList();
+        }
         DirectoryScanner scanner = new DirectoryScanner();
         scanner.setIncludes(fileIncludePattern);
         scanner.setBasedir(targetDirectory);
