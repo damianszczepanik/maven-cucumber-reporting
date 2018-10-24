@@ -89,14 +89,6 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
     private Boolean checkBuildResult;
 
     /**
-     * Build reports from parallel tests.
-     *
-     * @parameter property="true" default-value="false"
-     * @required
-     */
-    private Boolean parallelTesting;
-
-    /**
      * Additional attributes to classify current test run.
      *
      * @parameter
@@ -109,6 +101,13 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
      * @parameter property="cucumber.report.skip" default-value="false"
      */
     private boolean skip;
+
+    /**
+     * Merge features if they have same identifier.
+     *
+     * @parameter
+     */
+    private boolean mergeFeaturesById;
 
     @Override
     public void execute() throws MojoExecutionException {
@@ -134,12 +133,14 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
         List<String> jsonFilesToProcess = genericFindFiles(inputDirectory,jsonFiles);
 
         // Find all json files that match classification file include pattern...
-        List<String> classificationFilesToProcess = genericFindFiles(classificationDirectory,classificationFiles);
+        List<String> classificationFilesToProcess = genericFindFiles(classificationDirectory, classificationFiles);
 
         try {
             Configuration configuration = new Configuration(outputDirectory, projectName);
             configuration.setBuildNumber(buildNumber);
-            configuration.addReducingMethod(ReducingMethod.MERGE_FEATURES_BY_ID);
+            if (mergeFeaturesById) {
+                configuration.addReducingMethod(ReducingMethod.MERGE_FEATURES_BY_ID);
+            }
             if (!MapUtils.isEmpty(classifications)) {
                 for (Map.Entry<String, String> entry : classifications.entrySet()) {
                     configuration.addClassifications(StringUtils.capitalise(entry.getKey()), entry.getValue());
