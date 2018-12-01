@@ -89,6 +89,20 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
     private Boolean checkBuildResult;
 
     /**
+     * Treat 'undefined' steps as failures when using checkBuildResult=true.
+     *
+     * @parameter default-value="false"
+     */
+    private Boolean treatUndefinedAsFailed;
+
+    /**
+     * Treat 'pending' steps as failures when using checkBuildResult=true.
+     *
+     * @parameter default-value="false"
+     */
+    private Boolean treatPendingAsFailed;
+
+    /**
      * Additional attributes to classify current test run.
      *
      * @parameter
@@ -154,7 +168,9 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
             getLog().info("About to generate Cucumber report.");
             Reportable report = reportBuilder.generateReports();
 
-            if (checkBuildResult && (report == null || report.getFailedSteps() > 0)) {
+            if (checkBuildResult && (report == null || report.getFailedSteps() > 0 ||
+                    (treatUndefinedAsFailed && report.getUndefinedSteps() > 0) ||
+                    (treatPendingAsFailed && report.getPendingSteps() > 0))) {
                 throw new MojoExecutionException("BUILD FAILED - Check Report For Details");
             }
 
