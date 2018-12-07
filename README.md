@@ -49,6 +49,8 @@ Run with: mvn verify
                                         <param>other.properties</param>
                                 </classificationFiles>
                                 <parallelTesting>false</parallelTesting>
+                                <!-- optional, set true to fail build on test failures -->
+                                <checkBuildResult>false</checkBuildResult>
                             </configuration>
                         </execution>
                     </executions>
