@@ -103,11 +103,16 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
     private boolean skip;
 
     /**
-     * Merge features if they have same identifier.
+     * Merge features with the same ID so scenarios are be merged into single feature.
      *
      * @parameter
      */
     private boolean mergeFeaturesById;
+
+    /**
+     * Skips JSON reports which have been parsed but have none features or are empty file at all.
+     */
+    private boolean skipEmptyJSONFiles;
 
     @Override
     public void execute() throws MojoExecutionException {
@@ -146,8 +151,14 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
                     configuration.addClassifications(StringUtils.capitalise(entry.getKey()), entry.getValue());
                 }
             }
-            if(CollectionUtils.isNotEmpty(classificationFilesToProcess)) {
+            if (CollectionUtils.isNotEmpty(classificationFilesToProcess)) {
                 configuration.addClassificationFiles(classificationFilesToProcess);
+            }
+            if (mergeFeaturesById) {
+                configuration.addReducingMethod(ReducingMethod.MERGE_FEATURES_BY_ID);
+            }
+            if (skipEmptyJSONFiles) {
+                configuration.addReducingMethod(ReducingMethod.SKIP_EMPTY_JSON_FILES);
             }
 
             ReportBuilder reportBuilder = new ReportBuilder(jsonFilesToProcess, configuration);
