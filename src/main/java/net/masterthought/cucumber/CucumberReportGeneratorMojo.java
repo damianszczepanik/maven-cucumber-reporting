@@ -125,6 +125,8 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
 
     /**
      * Skips JSON reports which have been parsed but have none features or are empty file at all.
+     *
+     * @parameter
      */
     private boolean skipEmptyJSONFiles;
 
