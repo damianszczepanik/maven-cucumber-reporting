@@ -5,7 +5,6 @@ cache:
   - ~/.m2
 
 jdk:
-  - openjdk7
   - oraclejdk8
 
 script: mvn clean package
