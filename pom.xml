@@ -10,7 +10,7 @@
     <parent>
         <groupId>org.sonatype.oss</groupId>
         <artifactId>oss-parent</artifactId>
-        <version>7</version>
+        <version>9</version>
     </parent>
 
     <distributionManagement>
@@ -46,21 +46,20 @@
 
     <developers>
         <developer>
-            <id>kingsleyh</id>
-            <name>Kingsley Hendrickse</name>
-            <email>kingsley.hendrickse@gmail.com</email>
-        </developer>
-        <developer>
             <id>damianszczepanik</id>
             <name>Damian Szczepanik</name>
             <email>damianszczepanik@github</email>
+        </developer>
+        <developer>
+            <id>kingsleyh</id>
+            <name>Kingsley Hendrickse</name>
+            <email>kingsley.hendrickse@gmail.com</email>
         </developer>
     </developers>
 
     <profiles>
         <profile>
             <id>release-sign-artifacts</id>
-
             <activation>
                 <property>
                     <!-- will be set by the release plugin upon performing 
@@ -144,6 +143,11 @@
                     </execution>
                 </executions>
             </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-plugin-plugin</artifactId>
+                    <version>3.6.0</version>
+                </plugin>
         </plugins>
     </build>
 
@@ -151,7 +155,7 @@
         <dependency>
             <groupId>org.apache.maven</groupId>
             <artifactId>maven-plugin-api</artifactId>
-            <version>3.6.0</version>
+            <version>3.6.1</version>
         </dependency>
         <dependency>
             <groupId>org.hamcrest</groupId>
@@ -173,7 +177,7 @@
         <dependency>
             <groupId>net.masterthought</groupId>
             <artifactId>cucumber-reporting</artifactId>
-            <version>4.5.1</version>
+            <version>4.6.0</version>
         </dependency>
     </dependencies>
 
