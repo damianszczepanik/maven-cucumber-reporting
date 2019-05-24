@@ -75,7 +75,20 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
     private File classificationDirectory;
 
     /**
+     * File where the trends is stored.
+     * @parameter
+     */
+    private int trendsLimit;
+
+    /**
+     * File where the trends is stored.
+     * @parameter
+     */
+    private File trendsFile;
+
+    /**
      * Array of PROPERTY files to process
+     *
      * @parameter
      */
     private String[] classificationFiles;
@@ -175,6 +188,9 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
             }
             if (skipEmptyJSONFiles) {
                 configuration.addReducingMethod(ReducingMethod.SKIP_EMPTY_JSON_FILES);
+            }
+            if (trendsFile != null) {
+                configuration.setTrends(trendsFile, trendsLimit);
             }
 
             ReportBuilder reportBuilder = new ReportBuilder(jsonFilesToProcess, configuration);
