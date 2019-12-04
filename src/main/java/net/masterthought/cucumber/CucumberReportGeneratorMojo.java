@@ -137,6 +137,14 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
     private boolean mergeFeaturesById;
 
     /**
+     * Merge features and scenarios from different JSON files of different runs
+     * into a single report by features' and scenarios' ids.
+     *
+     * @parameter
+     */
+    private boolean mergeFeaturesWithRetest;
+
+    /**
      * Skips JSON reports which have been parsed but have none features or are empty file at all.
      *
      * @parameter
@@ -185,6 +193,9 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
             }
             if (mergeFeaturesById) {
                 configuration.addReducingMethod(ReducingMethod.MERGE_FEATURES_BY_ID);
+            }
+            if (mergeFeaturesWithRetest) {
+                configuration.addReducingMethod(ReducingMethod.MERGE_FEATURES_WITH_RETEST);
             }
             if (skipEmptyJSONFiles) {
                 configuration.addReducingMethod(ReducingMethod.SKIP_EMPTY_JSON_FILES);
