@@ -49,6 +49,10 @@ Run with: mvn verify
                                         <param>other.properties</param>
                                 </classificationFiles>
                                 <parallelTesting>false</parallelTesting>
+                                <!-- optional, set true to group features by its Ids -->
+                                <mergeFeaturesById>false</mergeFeaturesById>
+                                <!-- optional, set true to get a final report with latest results of the same test from different test runs -->
+                                <mergeFeaturesWithRetest>false</mergeFeaturesWithRetest>
                                 <!-- optional, set true to fail build on test failures -->
                                 <checkBuildResult>false</checkBuildResult>
                             </configuration>
