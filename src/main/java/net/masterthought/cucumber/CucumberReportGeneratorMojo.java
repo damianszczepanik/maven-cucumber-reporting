@@ -14,6 +14,7 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.codehaus.plexus.util.DirectoryScanner;
 import org.codehaus.plexus.util.StringUtils;
 
+import net.masterthought.cucumber.json.support.Status;
 import net.masterthought.cucumber.reducers.ReducingMethod;
 
 /**
@@ -151,6 +152,13 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
      */
     private boolean skipEmptyJSONFiles;
 
+    /**
+     * Consider skipped tests as not failed ones.
+     *
+     * @parameter
+     */
+    private boolean setSkippedAsNotFailing;
+
     @Override
     public void execute() throws MojoExecutionException {
 
@@ -200,6 +208,11 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
             if (skipEmptyJSONFiles) {
                 configuration.addReducingMethod(ReducingMethod.SKIP_EMPTY_JSON_FILES);
             }
+
+            if (setSkippedAsNotFailing) {
+                configuration.setNotFailingStatuses(Collections.singleton(Status.SKIPPED));
+            }
+
             if (trendsFile != null) {
                 configuration.setTrends(trendsFile, trendsLimit);
             }
