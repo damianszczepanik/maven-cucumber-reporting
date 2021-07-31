@@ -29,6 +29,10 @@
         <developerConnection>scm:git:git@github.com:damianszczepanik/maven-cucumber-reporting.git</developerConnection>
         <url>git@github.com:damianszczepanik/maven-cucumber-reporting.git</url>
     </scm>
+    <ciManagement>
+        <system>travis</system>
+        <url>https://travis-ci.com/github/damianszczepanik/maven-cucumber-reporting</url>
+    </ciManagement>
 
     <description>
         This project provides a maven mojo for using cucumber-reporting to publish pretty html reports for Cucumber.
@@ -49,6 +53,7 @@
             <id>damianszczepanik</id>
             <name>Damian Szczepanik</name>
             <email>damianszczepanik@github</email>
+            <url>https://github.com/damianszczepanik</url>
         </developer>
         <developer>
             <id>kingsleyh</id>
@@ -63,7 +68,7 @@
             <activation>
                 <property>
                     <!-- will be set by the release plugin upon performing 
-                        mvn release:clean release:prepare release:perform -->
+                         mvn release:clean release:prepare release:perform -->
                     <name>performRelease</name>
                     <value>true</value>
                 </property>
@@ -110,7 +115,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.6.0</version>
+                <version>3.8.1</version>
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
