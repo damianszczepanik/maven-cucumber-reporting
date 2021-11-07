@@ -103,6 +103,13 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
     private Boolean checkBuildResult;
 
     /**
+     * Treat failed scenarios as build failure when using checkBuildResult=true.
+     *
+     * @parameter default-value="false"
+     */
+    private Boolean treatScenariosAsFailed;
+
+    /**
      * Treat 'undefined' steps as failures when using checkBuildResult=true.
      *
      * @parameter default-value="false"
@@ -115,6 +122,13 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
      * @parameter default-value="false"
      */
     private Boolean treatPendingAsFailed;
+
+    /**
+     * Treat 'skipped' steps as failures when using checkBuildResult=true.
+     *
+     * @parameter default-value="false"
+     */
+    private Boolean treatSkippedAsFailed;
 
     /**
      * Additional attributes to classify current test run.
@@ -222,8 +236,10 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
             Reportable report = reportBuilder.generateReports();
 
             if (checkBuildResult && (report == null || report.getFailedSteps() > 0 ||
+                    (treatScenariosAsFailed && report.getFailedScenarios() > 0) ||
                     (treatUndefinedAsFailed && report.getUndefinedSteps() > 0) ||
-                    (treatPendingAsFailed && report.getPendingSteps() > 0))) {
+                    (treatPendingAsFailed && report.getPendingSteps() > 0) ||
+                    (treatSkippedAsFailed && report.getSkippedSteps() > 0))) {
                 throw new MojoExecutionException("BUILD FAILED - Check Report For Details");
             }
 
