@@ -163,7 +163,7 @@
         <dependency>
             <groupId>org.apache.maven</groupId>
             <artifactId>maven-plugin-api</artifactId>
-            <version>3.8.3</version>
+            <version>3.8.5</version>
         </dependency>
         <dependency>
             <groupId>org.hamcrest</groupId>
@@ -181,7 +181,7 @@
         <dependency>
             <groupId>net.masterthought</groupId>
             <artifactId>cucumber-reporting</artifactId>
-            <version>5.6.1</version>
+            <version>5.7.0</version>
         </dependency>
     </dependencies>
 
