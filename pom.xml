@@ -7,6 +7,10 @@
     <name>maven-cucumber-reporting</name>
     <url>http://maven.apache.org</url>
 
+    <properties>
+        <commons-collections.version>3.2.2</commons-collections.version>
+    </properties>
+
     <parent>
         <groupId>org.sonatype.oss</groupId>
         <artifactId>oss-parent</artifactId>
@@ -168,7 +172,7 @@
         <dependency>
             <groupId>commons-collections</groupId>
             <artifactId>commons-collections</artifactId>
-            <version>3.2.2</version>
+            <version>${commons-collections.version}</version>
         </dependency>
         <dependency>
             <groupId>org.hamcrest</groupId>
@@ -186,7 +190,7 @@
         <dependency>
             <groupId>net.masterthought</groupId>
             <artifactId>cucumber-reporting</artifactId>
-            <version>5.7.4</version>
+            <version>5.7.5</version>
         </dependency>
     </dependencies>
 
