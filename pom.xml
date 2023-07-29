@@ -9,7 +9,7 @@
 
     <properties>
         <commons-collections.version>3.2.2</commons-collections.version>
-        <gitHubRepo>jenkinsci/maven-cucumber-reporting</gitHubRepo>
+        <gitHubRepo>damianszczepanik/maven-cucumber-reporting</gitHubRepo>
     </properties>
 
     <parent>
