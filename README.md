@@ -1,6 +1,6 @@
 [![Github build](https://github.com/damianszczepanik/maven-cucumber-reporting/actions/workflows/build.yml/badge.svg?branch=master)](https://github.com/damianszczepanik/maven-cucumber-reporting/actions/workflows/build.yml)
 
-[![Maven Central](https://img.shields.io/maven-central/v/net.masterthought/maven-cucumber-reporting.svg)](http://search.maven.org/#search|gav|1|g%3A%22net.masterthought%22%20AND%20a%3A%22maven-cucumber-reporting%22)
+![GitHub tag](https://img.shields.io/github/v/tag/damianszczepanik/maven-cucumber-reporting?label=maven%20central)
 [![License](https://img.shields.io/badge/license-GNU%20LGPL%20v2.1-blue.svg)](https://raw.githubusercontent.com/damianszczepanik/maven-cucumber-reporting/master/LICENCE)
 
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-Online-blue.svg)](https://damianszczepanik.github.io/cucumber-html-reports/overview-features.html)

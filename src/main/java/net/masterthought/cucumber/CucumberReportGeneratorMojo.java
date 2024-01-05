@@ -6,16 +6,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.Collections;
 
-import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.collections.MapUtils;
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
-import org.codehaus.plexus.util.DirectoryScanner;
-import org.codehaus.plexus.util.StringUtils;
 
 import net.masterthought.cucumber.json.support.Status;
 import net.masterthought.cucumber.reducers.ReducingMethod;
+import org.codehaus.plexus.util.DirectoryScanner;
 
 /**
  * Goal which generates a Cucumber Report.
@@ -205,9 +205,9 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
             if (mergeFeaturesById) {
                 configuration.addReducingMethod(ReducingMethod.MERGE_FEATURES_BY_ID);
             }
-            if (!MapUtils.isEmpty(classifications)) {
+            if (MapUtils.isNotEmpty(classifications)) {
                 for (Map.Entry<String, String> entry : classifications.entrySet()) {
-                    configuration.addClassifications(StringUtils.capitalise(entry.getKey()), entry.getValue());
+                    configuration.addClassifications(StringUtils.capitalize(entry.getKey()), entry.getValue());
                 }
             }
             if (CollectionUtils.isNotEmpty(classificationFilesToProcess)) {

@@ -5,11 +5,9 @@
     <packaging>maven-plugin</packaging>
     <version>5.7.8-SNAPSHOT</version>
     <name>maven-cucumber-reporting</name>
-    <url>http://maven.apache.org</url>
+    <url>https://github.com/damianszczepanik/maven-cucumber-reporting</url>
 
     <properties>
-        <commons-collections.version>3.2.2</commons-collections.version>
-
         <gitHubRepo>damianszczepanik/maven-cucumber-reporting</gitHubRepo>
     </properties>
 
@@ -161,9 +159,9 @@
 			<scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>commons-collections</groupId>
-            <artifactId>commons-collections</artifactId>
-            <version>${commons-collections.version}</version>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
+            <version>4.4</version>
         </dependency>
         <dependency>
             <groupId>org.hamcrest</groupId>
