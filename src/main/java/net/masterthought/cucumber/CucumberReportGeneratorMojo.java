@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Collections;
 
+import net.masterthought.cucumber.sorting.SortingMethod;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.ArrayUtils;
@@ -173,6 +174,13 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
      */
     private boolean setSkippedAsNotFailing;
 
+    /**
+     * Sorting method for features inside the report.
+     *
+     * @parameter
+     */
+    private String sortingMethod;
+
     @Override
     public void execute() throws MojoExecutionException {
 
@@ -229,6 +237,10 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
 
             if (trendsFile != null) {
                 configuration.setTrends(trendsFile, trendsLimit);
+            }
+
+            if (sortingMethod != null){
+                configuration.setSortingMethod(SortingMethod.valueOf(sortingMethod));
             }
 
             ReportBuilder reportBuilder = new ReportBuilder(jsonFilesToProcess, configuration);
