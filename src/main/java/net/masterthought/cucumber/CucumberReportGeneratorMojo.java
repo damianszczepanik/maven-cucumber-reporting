@@ -2,10 +2,12 @@ package net.masterthought.cucumber;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.Collections;
 
+import net.masterthought.cucumber.json.support.Status;
+import net.masterthought.cucumber.reducers.ReducingMethod;
 import net.masterthought.cucumber.sorting.SortingMethod;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.MapUtils;
@@ -13,17 +15,16 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
-
-import net.masterthought.cucumber.json.support.Status;
-import net.masterthought.cucumber.reducers.ReducingMethod;
+import org.apache.maven.plugins.annotations.Execute;
+import org.apache.maven.plugins.annotations.LifecyclePhase;
+import org.apache.maven.plugins.annotations.Mojo;
 import org.codehaus.plexus.util.DirectoryScanner;
 
 /**
  * Goal which generates a Cucumber Report.
- *
- * @goal generate
- * @phase verify
  */
+@Mojo(name = "generate", defaultPhase = LifecyclePhase.VERIFY)
+@Execute(goal = "generate", phase = LifecyclePhase.VERIFY)
 public class CucumberReportGeneratorMojo extends AbstractMojo {
 
     /**
