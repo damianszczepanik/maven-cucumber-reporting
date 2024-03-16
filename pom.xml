@@ -72,7 +72,7 @@
             <id>release-sign-artifacts</id>
             <activation>
                 <property>
-                    <!-- will be set by the release plugin upon performing 
+                    <!-- will be set by the release plugin upon performing
                          mvn release:clean release:prepare release:perform -->
                     <name>performRelease</name>
                     <value>true</value>
@@ -159,6 +159,12 @@
             <artifactId>maven-plugin-api</artifactId>
             <version>4.0.0-alpha-13</version>
 			<scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven.plugin-tools</groupId>
+            <artifactId>maven-plugin-annotations</artifactId>
+            <version>3.11.0</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
