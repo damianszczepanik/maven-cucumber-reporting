@@ -18,6 +18,7 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Execute;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
 import org.codehaus.plexus.util.DirectoryScanner;
 
 /**
@@ -29,25 +30,20 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
 
     /**
      * Name of the project.
-     *
-     * @parameter property="project.name"
-     * @required
      */
+    @Parameter(property = "project.name", required = true)
     private String projectName;
 
     /**
      * Build number.
-     *
-     * @parameter property="build.number" default-value="1"
      */
+    @Parameter(property = "build.number", defaultValue = "1")
     private String buildNumber;
 
     /**
      * Location to output the HTML report to.
-     *
-     * @parameter default-value="${project.build.directory}/cucumber-reports"
-     * @required
      */
+    @Parameter(defaultValue = "${project.build.directory}/cucumber-reports", required = true)
     private File outputDirectory;
 
     /**
@@ -55,16 +51,14 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
      * Files in this directory will be matched against the patterns specified
      * in the jsonFiles property.
      * If not specified, defaults to the same value as outputDirectory.
-     *
-     * @parameter
      */
+    @Parameter
     private File inputDirectory;
 
     /**
-     * Array of JSON files to process
-     * @parameter
-     * @required
+     * Array of JSON files to process.
      */
+    @Parameter(required = true)
     private String[] jsonFiles;
 
     /**
@@ -72,114 +66,99 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
      * Files in this directory will be matched against the patterns specified
      * in the classificationFiles property.
      * If not specified, defaults to the same value as outputDirectory.
-     *
-     * @parameter
      */
+    @Parameter
     private File classificationDirectory;
 
     /**
      * File where the trends is stored.
-     * @parameter
      */
+    @Parameter
     private int trendsLimit;
 
     /**
-     * File where the trends is stored.
-     * @parameter
+     * File where the trends are stored.
      */
+    @Parameter
     private File trendsFile;
 
     /**
-     * Array of PROPERTY files to process
-     *
-     * @parameter
+     * Array of PROPERTY files to process.
      */
+    @Parameter
     private String[] classificationFiles;
 
     /**
      * Skip check for failed build result.
-     *
-     * @parameter default-value="true"
-     * @required
      */
+    @Parameter(defaultValue = "true", required = true)
     private Boolean checkBuildResult;
 
     /**
      * Treat failed scenarios as build failure when using checkBuildResult=true.
-     *
-     * @parameter default-value="false"
      */
+    @Parameter(defaultValue = "false")
     private Boolean treatScenariosAsFailed;
 
     /**
      * Treat 'undefined' steps as failures when using checkBuildResult=true.
-     *
-     * @parameter default-value="false"
      */
+    @Parameter(defaultValue = "false")
     private Boolean treatUndefinedAsFailed;
 
     /**
      * Treat 'pending' steps as failures when using checkBuildResult=true.
-     *
-     * @parameter default-value="false"
      */
+    @Parameter(defaultValue = "false")
     private Boolean treatPendingAsFailed;
 
     /**
      * Treat 'skipped' steps as failures when using checkBuildResult=true.
-     *
-     * @parameter default-value="false"
      */
+    @Parameter(defaultValue = "false")
     private Boolean treatSkippedAsFailed;
 
     /**
      * Additional attributes to classify current test run.
-     *
-     * @parameter
      */
+    @Parameter
     private Map<String, String> classifications;
 
     /**
      * Set this to "true" to bypass generation of Cucumber Reports entirely.
-     *
-     * @parameter property="cucumber.report.skip" default-value="false"
      */
+    @Parameter(property = "cucumber.report.skip", defaultValue = "false")
     private boolean skip;
 
     /**
-     * Merge features with the same ID so scenarios are be merged into single feature.
-     *
-     * @parameter
+     * Merge features with the same ID so scenarios are being merged into single feature.
      */
+    @Parameter
     private boolean mergeFeaturesById;
 
     /**
      * Merge features and scenarios from different JSON files of different runs
      * into a single report by features' and scenarios' ids.
-     *
-     * @parameter
      */
+    @Parameter
     private boolean mergeFeaturesWithRetest;
 
     /**
      * Skips JSON reports which have been parsed but have none features or are empty file at all.
-     *
-     * @parameter
      */
+    @Parameter
     private boolean skipEmptyJSONFiles;
 
     /**
      * Consider skipped tests as not failed ones.
-     *
-     * @parameter
      */
+    @Parameter
     private boolean setSkippedAsNotFailing;
 
     /**
      * Sorting method for features inside the report.
-     *
-     * @parameter
      */
+    @Parameter
     private String sortingMethod;
 
     @Override
@@ -203,7 +182,7 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
         }
 
         // Find all json files that match json file include pattern...
-        List<String> jsonFilesToProcess = genericFindFiles(inputDirectory,jsonFiles);
+        List<String> jsonFilesToProcess = genericFindFiles(inputDirectory, jsonFiles);
 
         // Find all json files that match classification file include pattern...
         List<String> classificationFilesToProcess = genericFindFiles(classificationDirectory, classificationFiles);
@@ -240,7 +219,7 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
                 configuration.setTrends(trendsFile, trendsLimit);
             }
 
-            if (sortingMethod != null){
+            if (sortingMethod != null) {
                 configuration.setSortingMethod(SortingMethod.valueOf(sortingMethod));
             }
 
