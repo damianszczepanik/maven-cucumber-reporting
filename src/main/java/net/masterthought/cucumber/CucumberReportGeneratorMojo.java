@@ -89,6 +89,12 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
     private String[] classificationFiles;
 
     /**
+     * Array of tags to exclude from the report.
+     */
+    @Parameter
+    private String[] excludedTagsFromReport;
+
+    /**
      * Skip check for failed build result.
      */
     @Parameter(defaultValue = "true", required = true)
@@ -200,6 +206,9 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
             }
             if (CollectionUtils.isNotEmpty(classificationFilesToProcess)) {
                 configuration.addClassificationFiles(classificationFilesToProcess);
+            }
+            if (ArrayUtils.isNotEmpty(excludedTagsFromReport)) {
+                configuration.setTagsToExcludeFromChart(excludedTagsFromReport);
             }
             if (mergeFeaturesById) {
                 configuration.addReducingMethod(ReducingMethod.MERGE_FEATURES_BY_ID);
