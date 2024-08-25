@@ -15,17 +15,16 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
-import org.apache.maven.plugins.annotations.Execute;
-import org.apache.maven.plugins.annotations.LifecyclePhase;
-import org.apache.maven.plugins.annotations.Mojo;
+
 import org.apache.maven.plugins.annotations.Parameter;
 import org.codehaus.plexus.util.DirectoryScanner;
 
 /**
  * Goal which generates a Cucumber Report.
+ *
+ * @goal generate
+ * @phase verify
  */
-@Mojo(name = "generate", defaultPhase = LifecyclePhase.VERIFY)
-@Execute(goal = "generate", phase = LifecyclePhase.VERIFY)
 public class CucumberReportGeneratorMojo extends AbstractMojo {
 
     /**
