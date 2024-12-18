@@ -18,6 +18,8 @@ import org.apache.maven.plugin.MojoExecutionException;
 
 import org.apache.maven.plugins.annotations.Parameter;
 import org.codehaus.plexus.util.DirectoryScanner;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Goal which generates a Cucumber Report.
@@ -26,6 +28,8 @@ import org.codehaus.plexus.util.DirectoryScanner;
  * @phase verify
  */
 public class CucumberReportGeneratorMojo extends AbstractMojo {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(CucumberReportGeneratorMojo.class);
 
     /**
      * Name of the project.
@@ -170,7 +174,7 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
     public void execute() throws MojoExecutionException {
 
         if (skip) {
-            getLog().info("Cucumber report generation is skipped.");
+            LOGGER.info("Cucumber report generation is skipped.");
             return;
         }
 
@@ -232,7 +236,7 @@ public class CucumberReportGeneratorMojo extends AbstractMojo {
             }
 
             ReportBuilder reportBuilder = new ReportBuilder(jsonFilesToProcess, configuration);
-            getLog().info("About to generate Cucumber report.");
+            LOGGER.info("About to generate Cucumber report.");
             Reportable report = reportBuilder.generateReports();
 
             if (checkBuildResult && (report == null || report.getFailedSteps() > 0 ||
