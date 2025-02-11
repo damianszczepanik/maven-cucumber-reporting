@@ -26,7 +26,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Goal which generates a Cucumber Report.
  */
-@Mojo(name = "generate", defaultPhase = LifecyclePhase.VERIFY)
+@Mojo(name = "generate", defaultPhase = LifecyclePhase.VERIFY, threadSafe = true)
 public class CucumberReportGeneratorMojo extends AbstractMojo {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CucumberReportGeneratorMojo.class);
