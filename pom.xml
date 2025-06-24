@@ -1,9 +1,13 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
+
     <groupId>net.masterthought</groupId>
     <artifactId>maven-cucumber-reporting</artifactId>
     <packaging>maven-plugin</packaging>
     <version>5.8.6-SNAPSHOT</version>
+
     <name>maven-cucumber-reporting</name>
     <url>https://github.com/damianszczepanik/maven-cucumber-reporting</url>
 
@@ -12,31 +16,19 @@
         <maven.compiler.target>11</maven.compiler.target>
         <maven.compiler.release>11</maven.compiler.release>
 
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.build.resourceEncoding>UTF-8</project.build.resourceEncoding>
+
         <gitHubRepo>damianszczepanik/maven-cucumber-reporting</gitHubRepo>
     </properties>
 
-    <parent>
-        <groupId>org.sonatype.oss</groupId>
-        <artifactId>oss-parent</artifactId>
-        <version>9</version>
-    </parent>
-
-    <distributionManagement>
-        <snapshotRepository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
-        <repository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-        </repository>
-    </distributionManagement>
 
     <scm>
-      <connection>scm:git:https://github.com/${gitHubRepo}.git</connection>
-      <developerConnection>scm:git:git@github.com:${gitHubRepo}.git</developerConnection>
-      <url>https://github.com/${gitHubRepo}</url>
-      <tag>${scmTag}</tag>
+        <connection>scm:git:https://github.com/${gitHubRepo}.git</connection>
+        <developerConnection>scm:git:git@github.com:${gitHubRepo}.git</developerConnection>
+        <url>https://github.com/${gitHubRepo}</url>
+        <tag>HEAD</tag>
     </scm>
 
     <description>
@@ -58,7 +50,6 @@
             <id>damianszczepanik</id>
             <name>Damian Szczepanik</name>
             <email>damianszczepanik@github</email>
-            <url>https://github.com/damianszczepanik</url>
         </developer>
         <developer>
             <id>kingsleyh</id>
@@ -78,11 +69,6 @@
                     <value>true</value>
                 </property>
             </activation>
-
-            <properties>
-                <gpg.keyname>0738FA8F</gpg.keyname>
-                <release.username>Damian Szczepanik</release.username>
-            </properties>
 
             <build>
                 <plugins>
@@ -108,6 +94,20 @@
 
     <build>
         <plugins>
+            <!-- browse:
+                 snapshots https://central.sonatype.com/service/rest/repository/browse/maven-snapshots/net/masterthought/maven-cucumber-reporting/
+            -->
+            <plugin>
+                <groupId>org.sonatype.central</groupId>
+                <artifactId>central-publishing-maven-plugin</artifactId>
+                <version>0.7.0</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <publishingServerId>sonatype-central</publishingServerId>
+                    <checksums>all</checksums>
+                </configuration>
+            </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -195,5 +195,4 @@
             <version>5.8.4</version>
         </dependency>
     </dependencies>
-
 </project>
