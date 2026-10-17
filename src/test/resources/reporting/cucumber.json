@@ -1,0 +1,27 @@
+[
+  {
+    "id": "local-fixture",
+    "name": "Local fixture",
+    "keyword": "Feature",
+    "uri": "local.feature",
+    "line": 1,
+    "elements": [
+      {
+        "id": "local-fixture;passing-scenario",
+        "name": "Passing scenario",
+        "keyword": "Scenario",
+        "type": "scenario",
+        "line": 2,
+        "steps": [
+          {
+            "keyword": "Given ",
+            "name": "a local fixture",
+            "line": 3,
+            "match": { "location": "Fixture.step()" },
+            "result": { "status": "passed", "duration": 1000000 }
+          }
+        ]
+      }
+    ]
+  }
+]
